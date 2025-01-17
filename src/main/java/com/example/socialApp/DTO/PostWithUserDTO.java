@@ -1,32 +1,30 @@
-package com.example.socialApp.model;
+package com.example.socialApp.DTO;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "posts")
-public class Posts {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PostWithUserDTO {
+    private String user_name;
+    private String user_photo;
     private int post_id;
     private String text_post;
     private String img_url;
     private int comments;
     private int likes;
 
-
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
-
-    public void setUser(Users user) {
-        this.user = user;
+    public PostWithUserDTO(String userName, String userPhoto, int postId, String textPost, String imgUrl, int comments, int likes) {
+        this.user_name = userName;
+        this.user_photo = userPhoto;
+        this.post_id = postId;
+        this.text_post = textPost;
+        this.img_url = imgUrl;
+        this.comments = comments;
+        this.likes = likes;
     }
 
-    public Users getUser() {
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
 
-        return user;
+    public void setUser_photo(String user_photo) {
+        this.user_photo = user_photo;
     }
 
     public void setPost_id(int post_id) {
@@ -49,6 +47,13 @@ public class Posts {
         this.likes = likes;
     }
 
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public String getUser_photo() {
+        return user_photo;
+    }
 
     public int getPost_id() {
         return post_id;
@@ -69,6 +74,4 @@ public class Posts {
     public int getLikes() {
         return likes;
     }
-
-
 }

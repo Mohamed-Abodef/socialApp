@@ -1,5 +1,6 @@
 package com.example.socialApp.Service;
 
+import com.example.socialApp.DTO.PostWithUserDTO;
 import com.example.socialApp.Repository.PostsRepo;
 import com.example.socialApp.model.Posts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,11 @@ public class PostsService {
         return postsRepo.save(post);
     }
 
-    public List<Posts> getAllPosts(){
-        return postsRepo.findAll();
+    public List<PostWithUserDTO> getAllPosts(){
+        List<PostWithUserDTO> posts = postsRepo.returAllPosts();
+        if (posts.isEmpty()) {
+            throw new RuntimeException("No posts available.");
+        }
+        return posts;
     }
 }

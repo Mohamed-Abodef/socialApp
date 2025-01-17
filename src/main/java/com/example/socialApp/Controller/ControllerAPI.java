@@ -1,5 +1,6 @@
 package com.example.socialApp.Controller;
 
+import com.example.socialApp.DTO.PostWithUserDTO;
 import com.example.socialApp.Service.PostsService;
 import com.example.socialApp.model.Posts;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ControllerAPI {
     private PostsService postsService;
 
     @GetMapping("/posts")
-    public List<Posts> getAllPosts(){
+    public List<PostWithUserDTO> getAllPosts(){
         return postsService.getAllPosts();
     }
 }

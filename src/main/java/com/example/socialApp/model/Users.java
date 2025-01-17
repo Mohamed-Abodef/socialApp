@@ -3,6 +3,7 @@ package com.example.socialApp.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -16,12 +17,34 @@ public class Users {
     private String user_photo;
     private String user_BG;
     private int posts;
-    private int follwors_num;
+    private int followers_num;
     private int following_num;
     private String email;
     private String pass;
     private String phone;
     private LocalDate birth;
+
+    @OneToMany(mappedBy = "user")
+    private List<Posts> postsObj;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comments> commentsObj;
+
+    public void setCommentsObj(List<Comments> commentsObj) {
+        this.commentsObj = commentsObj;
+    }
+
+    public List<Comments> getCommentsObj() {
+        return commentsObj;
+    }
+
+    public void setPostsObj(List<Posts> postsObj) {
+        this.postsObj = postsObj;
+    }
+
+    public List<Posts> getPostsObj() {
+        return postsObj;
+    }
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
@@ -43,8 +66,8 @@ public class Users {
         this.posts = posts;
     }
 
-    public void setFollwors_num(int follwors_num) {
-        this.follwors_num = follwors_num;
+    public void setFollowers_num(int follwors_num) {
+        this.followers_num = follwors_num;
     }
 
     public void setFollowing_num(int following_num) {
@@ -87,8 +110,8 @@ public class Users {
         return posts;
     }
 
-    public int getFollwors_num() {
-        return follwors_num;
+    public int getFollowers_num() {
+        return followers_num;
     }
 
     public int getFollowing_num() {
