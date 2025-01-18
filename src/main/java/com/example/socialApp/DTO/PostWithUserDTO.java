@@ -3,13 +3,14 @@ package com.example.socialApp.DTO;
 public class PostWithUserDTO {
     private String user_name;
     private String user_photo;
+    private int user_id;
     private int post_id;
     private String text_post;
     private String img_url;
     private int comments;
     private int likes;
 
-    public PostWithUserDTO(String userName, String userPhoto, int postId, String textPost, String imgUrl, int comments, int likes) {
+    public PostWithUserDTO(int user_id,String userName, String userPhoto, int postId, String textPost, String imgUrl, int comments, int likes) {
         this.user_name = userName;
         this.user_photo = userPhoto;
         this.post_id = postId;
@@ -17,6 +18,15 @@ public class PostWithUserDTO {
         this.img_url = imgUrl;
         this.comments = comments;
         this.likes = likes;
+        this.user_id = user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
     }
 
     public void setUser_name(String user_name) {

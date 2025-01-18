@@ -1,5 +1,6 @@
 package com.example.socialApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,9 +14,7 @@ public class Posts {
     private String img_url;
     private int comments;
     private int likes;
-
-
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;

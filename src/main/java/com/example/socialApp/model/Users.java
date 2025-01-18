@@ -1,5 +1,6 @@
 package com.example.socialApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -24,9 +25,11 @@ public class Users {
     private String phone;
     private LocalDate birth;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Posts> postsObj;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Comments> commentsObj;
 

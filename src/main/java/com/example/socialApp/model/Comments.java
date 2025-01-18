@@ -1,24 +1,21 @@
 package com.example.socialApp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "Comments")
 public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int comment_id;
-
-
-
     private String text_comment;
-
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Posts post;
