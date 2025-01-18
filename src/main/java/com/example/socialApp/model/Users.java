@@ -21,6 +21,7 @@ public class Users {
     private int followers_num;
     private int following_num;
     private String email;
+    @JsonIgnore
     private String pass;
     private String phone;
     private LocalDate birth;

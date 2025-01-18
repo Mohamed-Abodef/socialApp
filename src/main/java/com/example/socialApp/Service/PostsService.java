@@ -67,5 +67,9 @@ public class PostsService {
         post.setLikes(post.getLikes()-1);
         return postsRepo.save(post);
     }
+
+    public List<PostWithUserDTO> getMyPost(int id){
+        return postsRepo.returMyPosts(id);
+    }
 }
 

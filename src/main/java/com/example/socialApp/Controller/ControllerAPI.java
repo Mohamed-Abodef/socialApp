@@ -1,13 +1,13 @@
 package com.example.socialApp.Controller;
 
-import com.example.socialApp.DTO.CommentsDTO;
-import com.example.socialApp.DTO.PostWithUserDTO;
-import com.example.socialApp.DTO.PostingPostDTO;
-import com.example.socialApp.DTO.RequestComment;
+import com.example.socialApp.DTO.*;
+import com.example.socialApp.Repository.UserRepo;
 import com.example.socialApp.Service.CommentsService;
 import com.example.socialApp.Service.PostsService;
+import com.example.socialApp.Service.UserService;
 import com.example.socialApp.model.Comments;
 import com.example.socialApp.model.Posts;
+import com.example.socialApp.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,8 @@ public class ControllerAPI {
     private PostsService postsService;
     @Autowired
     private CommentsService commentsService;
-
+    @Autowired
+    private UserService userService;
     /*
     *
     * Post Sections
@@ -75,4 +76,38 @@ public class ControllerAPI {
         Comments comment = commentsService.addComment(requestComment);
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
+
+    /*
+    *
+    *  Profiles API
+    *
+    * */
+
+    @GetMapping("/getprofile/{id}")
+    public ProfileInfoDTO getprofile(@PathVariable int id){
+        return userService.getProfile(id);
+    }
+
+    @GetMapping("/getprofiledetail/{id}")
+    public ProfileDetailsDTO getprofiledetail(@PathVariable int id){
+        return userService.getProfileDetails(id);
+    }
+
+    @PutMapping("/updateBG")
+    public  ResponseEntity<Users> updateBg(@RequestParam("file") MultipartFile file,
+                                           @RequestParam("user_id") int user_id) throws IOException {
+       Users user = userService.updateBG(user_id, file);
+        return ResponseEntity.ok(user);
+    }
+    @PutMapping("/updateprofpic")
+    public  ResponseEntity<Users> updatepp(@RequestParam("file") MultipartFile file,
+                                           @RequestParam("user_id") int user_id) throws IOException {
+       Users user = userService.updateProfPic(user_id, file);
+        return ResponseEntity.ok(user);
+    }
+    @GetMapping("/posts/{id}")
+    public List<PostWithUserDTO> getmyposts(@PathVariable("id") int id){
+        return postsService.getMyPost(id);
+    }
+
 }
