@@ -71,9 +71,9 @@ public class ControllerAPI {
 
     @PostMapping("/posting")
     public ResponseEntity<Posts> addPost(
-            @RequestParam("file")MultipartFile file,
-            @RequestParam("text") String text,
-            @RequestParam("user_id") int user_id
+            @RequestParam(value = "text", required = false)MultipartFile file,
+            @RequestParam(value= "text", required = false) String text,
+            @RequestParam(value= "user_id", required = false) int user_id
             ) throws IOException {
         Posts newpost = postsService.savePost(new PostingPostDTO(text,file,user_id));
         return ResponseEntity.status(HttpStatus.CREATED).body(newpost);

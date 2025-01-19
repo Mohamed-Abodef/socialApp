@@ -87,9 +87,9 @@ public class UserService {
         String imgURL ="";
         if (!(file == null || file.isEmpty())){
             String fileName = file.getOriginalFilename();
-            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\src\\assets\\" + fileName);
+            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\assets\\" + fileName);
             Files.write(path, file.getBytes());
-            imgURL = path.toString();
+            imgURL = fileName;
         }
 
         user.setUser_BG(imgURL);
@@ -103,9 +103,9 @@ public class UserService {
         String imgURL ="";
         if (!(file == null || file.isEmpty())){
             String fileName = file.getOriginalFilename();
-            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\src\\assets\\" + fileName);
+            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\assets\\" + fileName);
             Files.write(path, file.getBytes());
-            imgURL = path.toString();
+            imgURL = fileName;
         }
 
         user.setUser_photo(imgURL);

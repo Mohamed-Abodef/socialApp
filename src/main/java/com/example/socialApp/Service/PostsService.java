@@ -30,9 +30,9 @@ public class PostsService {
         String imgURL ="";
         if (!(post.getFile() == null || post.getFile().isEmpty())){
             String fileName = post.getFile().getOriginalFilename();
-            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\src\\assets\\" + fileName);
+            Path path = Paths.get("D:\\courses\\code\\web site\\Spring\\socialApp\\assets\\" + fileName);
             Files.write(path, post.getFile().getBytes());
-            imgURL = path.toString();
+            imgURL = fileName;
         }
 
         newPost.setComments(0);
