@@ -12,12 +12,43 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    /**
+     * Register a new user.
+     *
+     * @param user the user to register
+     * @return the registered user
+     * @throws Exception if the email already exists
+     */
+    public Users registerUser(Users user) throws Exception {
+        // Check if the email already exists
+        Optional<Users> existingUser = userRepo.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new Exception("Email already exists.");
+        }
+
+        // Save the new user
+        return userRepo.save(user);
+    }
+
+    /**
+     * Authenticate a user by email and password.
+     *
+     * @param email    the email of the user
+     * @param password the password of the user
+     * @return true if authentication is successful, otherwise false
+     */
+    public boolean authenticateUser(String email, String password) {
+        Optional<Users> user = userRepo.findByEmail(email);
+        return user.isPresent() && user.get().getPass().equals(password);
+    }
 
     public Users saveUser(Users user){
         /*

@@ -1,7 +1,6 @@
 package com.example.socialApp.Controller;
 
 import com.example.socialApp.DTO.*;
-import com.example.socialApp.Repository.UserRepo;
 import com.example.socialApp.Service.CommentsService;
 import com.example.socialApp.Service.PostsService;
 import com.example.socialApp.Service.UserService;
@@ -27,12 +26,43 @@ public class ControllerAPI {
     private CommentsService commentsService;
     @Autowired
     private UserService userService;
+
+    /**
+     * Register a new user.
+     *
+     * @param user the user details
+     * @return the registered user or an error message
+     */
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody Users user) {
+        try {
+            Users registeredUser = userService.registerUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    /**
+     * Authenticate a user.
+     *
+     * @param user the login details (email and password)
+     * @return a success message or an error message
+     */
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody Users user) {
+        boolean isAuthenticated = userService.authenticateUser(user.getEmail(), user.getPass());
+        if (isAuthenticated) {
+            return ResponseEntity.ok("Login successful.");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password.");
+        }
+    }
     /*
     *
     * Post Sections
     *
     * */
-
 
     @GetMapping("/posts")
     public List<PostWithUserDTO> getAllPosts(){
